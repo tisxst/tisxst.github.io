@@ -24,7 +24,10 @@
   height: 100%;
   box-shadow: 0 0 10px #13505B, 0 0 5px #13505B;
   opacity: 1.0;
-  transform: rotate(3deg) translate(0px, -4px);
+
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+      -ms-transform: rotate(3deg) translate(0px, -4px);
+          transform: rotate(3deg) translate(0px, -4px);
 }
 
 /* Remove these to get rid of the spinner */
@@ -45,7 +48,9 @@
   border-top-color: #13505B;
   border-left-color: #13505B;
   border-radius: 50%;
-  animation: nprogress-spinner 400ms linear infinite;
+
+  -webkit-animation: nprogress-spinner 400ms linear infinite;
+          animation: nprogress-spinner 400ms linear infinite;
 }
 
 .nprogress-custom-parent {
@@ -56,6 +61,11 @@
 .nprogress-custom-parent #nprogress .spinner,
 .nprogress-custom-parent #nprogress .bar {
   position: absolute;
+}
+
+@-webkit-keyframes nprogress-spinner {
+  0%   { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
 }
 @keyframes nprogress-spinner {
   0%   { transform: rotate(0deg); }

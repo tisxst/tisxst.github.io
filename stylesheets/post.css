@@ -189,6 +189,10 @@
 	min-width: 336px;
 	border-collapse: collapse;
 	border-spacing: 0;
+	-webkit-border-radius: .5em;
+	-moz-border-radius: .5em;
+	-ms-border-radius: .5em;
+	-o-border-radius: .5em;
 	border-radius: .5em
 }
 
@@ -269,6 +273,7 @@
 	font-style: inherit;
 	font-weight: inherit;
 	text-decoration: inherit;
+	-webkit-text-emphasis: filled circle;
 	-moz-text-emphasis: filled circle;
 	-ms-text-emphasis: filled circle;
 	text-emphasis: filled circle;
