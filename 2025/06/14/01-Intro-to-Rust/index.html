@@ -20,28 +20,34 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Tisxst">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="01. Intro to Rust 在网上已经看到无数关于 Rust 语言的东西了，感觉很厉害，可以替代 C 语言做嵌入式，学学看是不是我可以做的。代码均在 Ubuntu 中运行成功。 1 - Hello World 安装部分就不多赘述了，直接进入正题 123fn main() &#123;    println!(&quot;Hello, world!&quot;);&#125; 程序保存为 m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01. Intro to Rust">
+<meta property="og:url" content="http://example.com/2025/06/14/01-Intro-to-Rust/index.html">
 <meta property="og:site_name" content="Tisxst">
+<meta property="og:description" content="01. Intro to Rust 在网上已经看到无数关于 Rust 语言的东西了，感觉很厉害，可以替代 C 语言做嵌入式，学学看是不是我可以做的。代码均在 Ubuntu 中运行成功。 1 - Hello World 安装部分就不多赘述了，直接进入正题 123fn main() &#123;    println!(&quot;Hello, world!&quot;);&#125; 程序保存为 m">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-14T15:46:09.000Z">
+<meta property="article:modified_time" content="2025-06-14T17:21:24.532Z">
 <meta property="article:author" content="Tisxst">
+<meta property="article:tag" content="学习记录">
+<meta property="article:tag" content="Rust">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2025/06/14/01-Intro-to-Rust/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Tisxst</title>
+  <title>01. Intro to Rust | Tisxst</title>
   
 
 
@@ -145,9 +151,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -163,10 +170,9 @@
       <meta itemprop="name" content="Tisxst">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/14/01-Intro-to-Rust/" class="post-title-link" itemprop="url">01. Intro to Rust</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          01. Intro to Rust
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -205,277 +211,79 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1>01. Intro to Rust</h1>
+        <h1>01. Intro to Rust</h1>
 <p>在网上已经看到无数关于 Rust 语言的东西了，感觉很厉害，可以替代 C 语言做嵌入式，学学看是不是我可以做的。代码均在 Ubuntu 中运行成功。</p>
 <h2 id="1-Hello-World">1 - Hello World</h2>
 <p>安装部分就不多赘述了，直接进入正题</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Hello, world!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>程序保存为 <code>main.rs</code>，然后使用指令 <code>rustc main.rs</code> 即可进行编译，然后直接运行 <code>./main</code> 就可以运行程序了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/06/14/01-Intro-to-Rust/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+<span id="more"></span>
+<hr>
+<p>这里就能看到 Rust 的基本结构了，上述代码定义了一个名为 <code>main</code> 的函数，这是可执行的 Rust 程序入口。此处 <code>main</code> 函数没有参数，没有返回值。如果有参数，应该包含在 <code>main</code> 后面的括号中。</p>
+<p>函数体包含在大括号 <code>&#123;&#125;</code> 中，通常函数的小括号和大括号之间有个空格。</p>
+<p>函数体中 <code>println!</code> 表示调用了一个 Rust 的宏定义，而不是一个 <code>println</code> 函数，宏定义和函数调用的区别后续会讲。</p>
+<p><code>“Hello, world!”</code>  作为一个参数传递给了 <code>prinltn!</code> 然后打印出来了；最后，该语句以分号结尾 <code>;</code>，表示语句结束。</p>
+<hr>
+<p>由于我们使用了 <code>rustc</code> 对程序进行了编译，如果在 Windows 环境中，会生成可执行的 <code>.exe</code> 文件，该程序可以在任何没有装 Rust 环境的 Windows 环境中运行；如果在 Linux 或者 MacOS 中进行编译，也同样会生成对应的执行文件，可以直接在对应的环境中直接运行。</p>
+<p>如果是类似 Python 的语言，则必须安装相应的运行环境才可以。</p>
+<h2 id="2-Cargo">2 - Cargo</h2>
+<p>Cargo 是 Rust 的构建系统和包管理器，cargo 会自动调用 rustc 对程序进行编译，所以除非是特殊需求，通常默认使用 cargo 进行项目和脚本的管理。</p>
+<p>如下代码可以使用 cargo 创建一个新项目</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cargo new hello_cargo</span><br></pre></td></tr></table></figure>
+<p>该命令会在当前文件夹下创建一个叫做 <code>hello_cargo</code> 的文件夹，并包含一个 <code>cargo.toml</code> 文件和一个 <code>src</code> 文件夹；在 <code>src</code> 文件夹中包含了一个 <code>main.rs</code> 文件。</p>
+<p>这个指令同时会对新项目进行 <code>git</code> 的初始化操作，并且会自动生成 <code>.gitignore</code> 文件。</p>
+<p>其中 <code>.toml</code> 是 cargo 的配置格式，默认内容如下：</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[package]</span></span><br><span class="line"><span class="attr">name</span> = <span class="string">&quot;l2_hello_cargo&quot;</span></span><br><span class="line"><span class="attr">version</span> = <span class="string">&quot;0.1.0&quot;</span></span><br><span class="line"><span class="attr">edition</span> = <span class="string">&quot;2024&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="section">[dependencies]</span></span><br></pre></td></tr></table></figure>
+<p>每个使用中括号 <code>[]</code> 分隔的部分一个单独的组，中括号里的内容是组名。<code>[package]</code> 组中包含了组成一个「包」的配置，比如包名、使用的 Rust 小版本号和 Rust 的大版本号。Rust 通常每 3 年发布一个大版本更新，因此目前这段代码是 2024 版本的 Rust 生成的文件。</p>
+<p>最后一行 <code>[dependencies]</code> 组中包含了当前项目依赖的其他包的列表。由于目前这个项目没有任何其他依赖，所以目前留空。</p>
+<p>在 <code>src</code> 文件夹中，自动包含了 <code>Hello, world!</code> 的所有代码。Cargo 默认开发者将代码放在 <code>src</code> 文件夹中，而在最上层的目录中，应只包含 <code>README</code> 文件、许可证信息、配置信息以及其他与代码无关的信息。</p>
+<p>如果想将一个 Rust 文件使用 Cargo 进行管理，可以在文件夹中使用 <code>cargo init</code> 自动进行处理。</p>
+<hr>
+<p>使用 cargo 构建程序使用如下指令</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cargo build</span><br></pre></td></tr></table></figure>
+<p>Cargo 会自动生成 <code>Cargo.lock</code> 文件以及 <code>target</code> 文件夹。<code>Cargo.lock</code> 文件追踪了项目中的不同依赖关系，这个文件由 cargo 自动管理，不需要手动修改；在 <code>target</code> 文件夹中包含了 <code>CACHEDIR.TAG</code> 以及 <code>debug</code> 文件夹；在 <code>debug</code> 文件夹中包含了调试程序需要的文件和相关信息，可以直接运行 <code>debug</code> 中的可执行程序 <code>hello_cargo</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./target/debug/hello_cargo</span><br></pre></td></tr></table></figure>
+<p>但是每次打这么长很费劲，所以开发者通常直接编译并运行，使用如下指令</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cargo run</span><br></pre></td></tr></table></figure>
+<p>为了避免编译产生问题，cargo 还提供了一个快速检查的工具 <code>cargo check</code>，可以检查代码是否可以通过编译。通常 <code>cargo check</code> 使用的时间远小于 <code>cargo run</code>，一般来说为了检查语法错误，开发者更常用 <code>cargo check</code> 而不是 <code>cargo run</code>。</p>
+<hr>
+<p>总结：</p>
+<ol>
+<li>创建新项目 <code>cargo new &lt;project_name&gt;</code></li>
+<li>编译项目 <code>cargo build</code></li>
+<li>编译并运行 <code>cargo run</code></li>
+<li>检查代码是否可以通过编译 <code>cargo check</code></li>
+</ol>
+<p>如果代码没问题，可以进行编译并发布到正式生产环境中，使用 <code>cargo build --release</code> 进行编译，这种情况下编译时间更长，因为编译器会对代码进行优化，使其运行速度更快。生成的代码会在 <code>target/release</code> 文件夹中。</p>
+
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" rel="tag"># 学习记录</a>
+              <a href="/tags/Rust/" rel="tag"># Rust</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/06/14/Sony-ZV-E10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Tisxst">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tisxst">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/14/Sony-ZV-E10/" class="post-title-link" itemprop="url">Sony ZV-E10</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2025-06-14 13:33:49 / Modified: 14:05:48" itemprop="dateCreated datePublished" datetime="2025-06-14T13:33:49+08:00">2025-06-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81/" itemprop="url" rel="index"><span itemprop="name">电子产品</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>索尼 ZV-E10</h1>
-<p>由于眼瞎的原因，本来要买的 ZV-E10 II 变成了 ZV-E10，对自己很是无语。不过少花了 1600 大洋，还给了俩镜头，我还是决定不退货重买了。毕竟也是新手，估计即使多花了这 1600 也体验不出什么质的飞跃。</p>
-<img src="/2025/06/14/Sony-ZV-E10/2.jpg" class="" title="camera">
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/06/14/Sony-ZV-E10/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/06/02/Nihilism/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Tisxst">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tisxst">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/02/Nihilism/" class="post-title-link" itemprop="url">Nihilism</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-02 23:09:07" itemprop="dateCreated datePublished" datetime="2025-06-02T23:09:07+08:00">2025-06-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-03 00:39:54" itemprop="dateModified" datetime="2025-06-03T00:39:54+08:00">2025-06-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%93%B2%E5%AD%A6%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">哲学知识</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="什么是虚无主义">什么是虚无主义</h2>
-<p>虚无主义（Nihilism），该词取自拉丁语，这个概念由尼采系统性提出，是指一种认为任何「价值」均无意义，世界是不可知并且无法与之沟通的信念。最明显的体现是认为宇宙是没有意义的，事物都是无目的的存在。虚无主义者的认识论（即个体的知识观，也即个体知识与知识获得所持有的信念）主体呈现悲观态度。</p>
-<p>这种认知观念下所导致的最日常的状态就是：感觉不到自己人生的意义和目的，认为自己的灵魂无处安放，对未来缺乏愿景，不知道自己的生活去往何方。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/06/02/Nihilism/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/06/14/Sony-ZV-E10/" rel="prev" title="Sony ZV-E10">
+      <i class="fa fa-chevron-left"></i> Sony ZV-E10
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/06/02/Welcome-to-Tisxst-s-Blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Tisxst">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tisxst">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/06/02/Welcome-to-Tisxst-s-Blog/" class="post-title-link" itemprop="url">Welcome to Tisxst's Blog</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-06-02 22:31:39" itemprop="dateCreated datePublished" datetime="2025-06-02T22:31:39+08:00">2025-06-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-03 00:33:12" itemprop="dateModified" datetime="2025-06-03T00:33:12+08:00">2025-06-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">个人生活</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>今天花了一晚上的时间在 Github 上部署了 Hexo 的服务，不知道实现原理，但是只要可以使用和设置，这对我来说就够用了。</p>
-<p>世界的本质就是极大的数据库，从历史到现在就是数据堆砌而成的，那自己的记录便是对自己生活的复盘资源。我不习惯用笔去记录，那就让赛博日记成为生活的一部分。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/06/02/Welcome-to-Tisxst-s-Blog/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -528,6 +336,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">01. Intro to Rust</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Hello-World"><span class="nav-number">1.1.</span> <span class="nav-text">1 - Hello World</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Cargo"><span class="nav-number">1.2.</span> <span class="nav-text">2 - Cargo</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
