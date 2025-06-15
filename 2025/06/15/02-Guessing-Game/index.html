@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="02. Guessing Game 猜数字游戏基本上是每个编程语言必须要写一次的东西，可以用来快速掌握条件判断的语句和变量等基础知识。 这次笔记，我们要学会使用 let，读取用户输入，字符串，生成随机数，添加依赖，数值对比，match，简单错误处理等知识。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="02. Guessing Game">
+<meta property="og:url" content="http://example.com/2025/06/15/02-Guessing-Game/index.html">
+<meta property="og:site_name" content="Tisxst">
+<meta property="og:description" content="02. Guessing Game 猜数字游戏基本上是每个编程语言必须要写一次的东西，可以用来快速掌握条件判断的语句和变量等基础知识。 这次笔记，我们要学会使用 let，读取用户输入，字符串，生成随机数，添加依赖，数值对比，match，简单错误处理等知识。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-15T09:30:54.000Z">
+<meta property="article:modified_time" content="2025-06-15T16:13:02.565Z">
+<meta property="article:author" content="Tisxst">
+<meta property="article:tag" content="学习记录">
+<meta property="article:tag" content="Rust">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2025/06/15/02-Guessing-Game/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>02. Guessing Game | Tisxst</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Tisxst</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/06/15/02-Guessing-Game/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Tisxst">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tisxst">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          02. Guessing Game
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-06-15 17:30:54" itemprop="dateCreated datePublished" datetime="2025-06-15T17:30:54+08:00">2025-06-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-06-16 00:13:02" itemprop="dateModified" datetime="2025-06-16T00:13:02+08:00">2025-06-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">编程学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1>02. Guessing Game</h1>
+<p>猜数字游戏基本上是每个编程语言必须要写一次的东西，可以用来快速掌握条件判断的语句和变量等基础知识。</p>
+<p>这次笔记，我们要学会使用 <code>let</code>，读取用户输入，字符串，生成随机数，添加依赖，数值对比，<code>match</code>，简单错误处理等知识。</p>
+<span id="more"></span>
+<h2 id="Step-1-Input-a-number">Step 1: Input a number</h2>
+<p>首先，根据上一个 Rust 笔记中的内容，创建一个新的项目，叫做 <code>guessing_game</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cargo new guessing_game</span><br></pre></td></tr></table></figure>
+<p>而后，在 <code>src</code> 文件夹中的 <code>main.rs</code>修改代码为如下内容</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::io;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Guess the number!&quot;</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Please input your guess.&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">guess</span> = <span class="type">String</span>::<span class="title function_ invoke__">new</span>();</span><br><span class="line"></span><br><span class="line">    io::<span class="title function_ invoke__">stdin</span>()</span><br><span class="line">        .<span class="title function_ invoke__">read_line</span>(&amp;<span class="keyword">mut</span> guess)</span><br><span class="line">        .<span class="title function_ invoke__">expect</span>(<span class="string">&quot;Failed to read line&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;You guessed: &#123;&#125;&quot;</span>, guess);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>在文件开头出现了 <code>use std::io;</code>。</p>
+<p>Rust 的标准库中包含了一系列提前定义的函数，可以直接调用，但是有一部分函数必须要显示的引入标准库中的内容才能使用。比如使用 <code>std::io</code> 表示调用了标准库中的 <code>io</code> 库，可以使用其中的一些好用的函数来接收用户输入。</p>
+<hr>
+<p>第七行，<code>let mut guess = String::new();</code>，这是变量赋值的操作，意思是：创建一个名为 <code>guess</code> 的变量，而后调用 <code>new()</code> 函数生成并返回一个字符串值，并将其赋值给 <code>guess</code>。这里有个 <code>mut</code>，意思是 mutable，也就是赋值后变量可以修改，因为在 Rust 中，变量默认赋值后不可修改。</p>
+<hr>
+<p>第九行，<code>io::stdin()</code> 表示调用 <code>io</code> 库中的 <code>stdin</code> 函数，如果我们没有在程序开头使用 <code>use std::io</code>，也可以在第九行写 <code>std::io::stdin</code>。</p>
+<p>第十行，<code>.read_line(&amp;mut guess)</code>，表示调用了 <code>read_line</code> 方法，并将 <code>&amp;mut guess</code> 作为参数传入 <code>read_line</code>，以告知将用户输入的内容储存到何处。<code>read_line</code> 本身的作用是接收用户输入，并将输入内容作为字符串追加到另一个字符串中（不是覆盖），所以传入的参数必须是可变参数（mutable）。因此，这行代码的总体表达的就是，将用户输入的信息追加到可变变量 <code>guess</code> 中。这里有一个 <code>&amp;</code> 未作解释，目前先使用，后续再进行详细解释。</p>
+<p>第十一行，<code>.expect(&quot;Failed to read line&quot;);</code>，表示当 <code>.read_line</code> 的返回值为 <code>Err</code> 时，<code>.expect</code> 会执行。<code>.read_line</code> 会返回两种结果值，<code>Ok</code> 或 <code>Err</code>，如果操作成功，就会返回 <code>Ok</code> 并包含生成的值；如果操作失败，则会返回 <code>Err</code> 并包含失败的原因。如果程序代码中未包含 <code>.expect</code> 的处理，Rust 编译依旧会执行，但是会出现一个提示，告知此处可能会产生 <code>Err</code> 结果，但是没有代码处理可能的错误。</p>
+<hr>
+<p>第十三行，<code>println!(&quot;You guessed: &#123;&#125;&quot;, guess);</code> 中，<code>&#123;&#125;</code> 是占位符，可以将需要打印的变量放在括号中，也可以使用逗号分隔代码之后，在结束小括号结束前提交替换占位符的值，如下举例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">x</span> = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="variable">y</span> = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;x = &#123;x&#125;, y + 2 = &#123;&#125;&quot;</span>, y + <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，变量运算不能在大括号中进行，<code>y + 2 = &#123;y + 2&#125;</code> 这种操作是不可以的。</p>
+<h2 id="Step-2-Generate-Secret-Number">Step 2: Generate Secret Number</h2>
+<p>Rust 的开发团队提供了一个叫作 <code>rand</code> 的函数，这个函数通常是用来在其他的代码中使用的，而不是直接可以运行的程序。我们写完的代码编译后会生成一个可执行文件，但是 <code>rand</code> 函数并不直接可执行。</p>
+<p>为了使用 <code>rand</code>，我们需要更新当前项目的 <code>Cargo.toml</code> 文件，因为它属于一个依赖。我参考的教程使用了 <code>rand = &quot;0.8.5&quot;</code> 的版本，所以在 <code>[dependencies]</code> 下加上这个依赖。</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[dependencies]</span></span><br><span class="line"><span class="attr">rand</span> = <span class="string">&quot;0.8.5&quot;</span></span><br></pre></td></tr></table></figure>
+<p>这里并不是指定 <code>rand</code> 必须为 <code>0.8.5</code> 版本，而是介于 <code>0.8.5</code> 至 <code>0.9.0</code> 之间。此时再次进行编译时，Rust 会将 <code>rand</code> 编译到程序中，因此终端会给出很多编译提示。</p>
+<p>当我们在依赖中使用了其他外部依赖时，Cargo 会自动从 <a target="_blank" rel="noopener" href="http://Crates.io">Crates.io</a> 获取最新的包。<a target="_blank" rel="noopener" href="http://Crates.io">Crates.io</a> 是 Rust 的社区，开发者会将他们的开源 Rust 项目发布在这里。因此当我们下载 <code>rand</code> 时，Cargo 还会自动下载 <code>rand</code> 所需要的依赖，而后一起进行编译。</p>
+<hr>
+<p>Cargo 是一个非常强大的包管理工具，以我们使用的代码为例，假如 <code>rand 0.8.6</code> 版本发布，包含重大 Bug 修复，但是却会因为版本更新导致依赖前一个版本的代码崩溃，此时 <code>Cargo.lock</code> 会追踪你构建代码时的依赖版本，此时 Cargo 会先从该文件中获取你使用的依赖版本，而后使用这个特定版本的依赖（除非你后续明确指定将依赖的版本进行升级）。</p>
+<p>假设我们需要更新依赖包，可以使用 <code>cargo update</code> 对依赖进行更新，当然，<code>cargo</code> 会寻找大于 <code>0.8.X</code> 的版本，如果需要更新到 <code>0.9.0</code> 则需要在 <code>Cargo.toml</code> 文件中指定 <code>rand = &quot;0.9.0&quot;</code>。</p>
+<hr>
+<p>由于我们在 <code>Cargo.toml</code> 中已经包含了 <code>rand</code> 的依赖，现在可以直接在代码中对其进行调用了。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::io;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> rand::Rng;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Guess the number!&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">secret_number</span> = rand::<span class="title function_ invoke__">thread_rng</span>().<span class="title function_ invoke__">gen_range</span>(<span class="number">1</span>..=<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;The secret number is: &#123;secret_number&#125;&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Please input your guess.&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">guess</span> = <span class="type">String</span>::<span class="title function_ invoke__">new</span>();</span><br><span class="line"></span><br><span class="line">    io::<span class="title function_ invoke__">stdin</span>()</span><br><span class="line">        .<span class="title function_ invoke__">read_line</span>(&amp;<span class="keyword">mut</span> guess)</span><br><span class="line">        .<span class="title function_ invoke__">expect</span>(<span class="string">&quot;Failed to read line&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;You guessed: &#123;guess&#125;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目前不需要明确了解 <code>rand::thread_rng().gen_range(1..=100);</code> 的作用原理，后续会详细讲解，只需要知道 <code>gen_range(1..=100)</code> 是 <code>rand</code> 中 <code>thread_rng()</code> 的方法，其中范围的表示方法为 <code>start..=end</code>。</p>
+<p>而后，我们使用 <code>println!</code> 将这个结果打印了出来。通常来说开发过程中这么做为了调试，实际在上线的时候这个必须得删掉。</p>
+<h2 id="Step-3-Comparing">Step 3: Comparing</h2>
+<p>通常在我们学习其他语言的时候，进行条件判断，我们会使用 <code>if</code>，但是这里我们使用另一个标准库的方法</p>
+<p><code>use std::cmp::Ordering;</code></p>
+<p>在 <code>Ordering</code> 中有三个变体（这些术语现在目的是混个眼熟），分别是 <code>Less</code>，<code>Greater</code> 和 <code>Equal</code>。这是对比结果的返回值。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">match</span> guess.<span class="title function_ invoke__">cmp</span>(&amp;secret_number) &#123;</span><br><span class="line">    Ordering::Less =&gt; <span class="built_in">println!</span>(<span class="string">&quot;Too small!&quot;</span>),</span><br><span class="line">    Ordering::Greater =&gt; <span class="built_in">println!</span>(<span class="string">&quot;Too big!&quot;</span>),</span><br><span class="line">    Ordering::Equal =&gt; <span class="built_in">println!</span>(<span class="string">&quot;You win!&quot;</span>),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这段代码的意思是，调用 <code>std::cmp</code> 方法对比猜测值与实际生成的随机值，这个对比会返回一个 <code>Ordering</code> 枚举类型数据，并且根据其对比返回的 <code>Ordering</code> 结果来决定后续步骤的代码。</p>
+<p>但是在添加这段代码后，我们编译并不能通过，这是因为我们使用 <code>.cmp</code> 对比的数据类型不匹配，我们在用字符串和数字进行对比，数字类型包含下列：</p>
+<table>
+<thead>
+<tr>
+<th><code>i32</code></th>
+<th><code>u32</code></th>
+<th><code>i64</code></th>
+<th><code>u64</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>32 位数字</td>
+<td>32 位无符号数字</td>
+<td>64 位数字</td>
+<td>64 位无符号数字</td>
+</tr>
+</tbody>
+</table>
+<p>如果不明确指定，Rust 默认的数字类型位 <code>i32</code>。为了解决对比类型不匹配的问题，我们需要将 <code>guess</code> 转换为 <code>i32</code> 类型。因此我们需要将接收到用户输入的值转换为数字，并再次赋值给同名变量。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::io;</span><br><span class="line"><span class="keyword">use</span> std::cmp::Ordering;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> rand::Rng;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">	-- snip --</span><br><span class="line"></span><br><span class="line">    io::<span class="title function_ invoke__">stdin</span>()</span><br><span class="line">        .<span class="title function_ invoke__">read_line</span>(&amp;<span class="keyword">mut</span> guess)</span><br><span class="line">        .<span class="title function_ invoke__">expect</span>(<span class="string">&quot;Failed to read line&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">guess</span>: <span class="type">u32</span> = guess.<span class="title function_ invoke__">trim</span>().<span class="title function_ invoke__">parse</span>().<span class="title function_ invoke__">expect</span>(<span class="string">&quot;Please type a number!&quot;</span>);</span><br><span class="line"></span><br><span class="line"> 	-- snip --</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这行代码中，<code>trim()</code> 用来移除所有的空格。由于接收用户数据的时候，用户必须要按回车确认输入，这会自动给接收的数据加上 <code>\n</code>。</p>
+<p><code>.parse()</code> 是 <code>String</code> 的一个内置函数，用来将字符串转换为另一个变量类型。由于 <code>.parse()</code> 方法是强行转换任何数字类型的字符串至数字类型，因此很可能在转换特殊字符时出现错误，所以我们需要 <code>.expect</code> 处理转换失败时，<code>.parse()</code> 返回的 <code>Err</code> 信息。</p>
+<p>到现在为止，我们输入的信息就可以正常的进行对比了。但是每次运行程序只能对比一次，所以我们需要进行循环操作。</p>
+<h2 id="Step-3-Looping">Step 3: Looping</h2>
+<p>与其他语言的 <code>while</code> 或者 <code>for</code> 循环不同，Rust 可以使用 <code>loop</code> 关键字来创造循环。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::io;</span><br><span class="line"><span class="keyword">use</span> std::cmp::Ordering;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> rand::Rng;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">	-- snip --</span><br><span class="line"></span><br><span class="line">    <span class="keyword">loop</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">guess</span> = <span class="type">String</span>::<span class="title function_ invoke__">new</span>();</span><br><span class="line">		-- snip --</span><br><span class="line">        <span class="keyword">match</span> guess.<span class="title function_ invoke__">cmp</span>(&amp;secret_number) &#123;</span><br><span class="line">            Ordering::Less =&gt; <span class="built_in">println!</span>(<span class="string">&quot;Too small!&quot;</span>),</span><br><span class="line">            Ordering::Greater =&gt; <span class="built_in">println!</span>(<span class="string">&quot;Too big!&quot;</span>),</span><br><span class="line">            Ordering::Equal =&gt; <span class="built_in">println!</span>(<span class="string">&quot;You win!&quot;</span>),</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于目前未设置终止条件，循环会一直进行下去。可以通过修改 <code>Ordering::Equal</code> 的模式匹配行为来终止循环。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">match</span> guess.<span class="title function_ invoke__">cmp</span>(&amp;secret_number) &#123;</span><br><span class="line">    Ordering::Less =&gt; <span class="built_in">println!</span>(<span class="string">&quot;Too small!&quot;</span>),</span><br><span class="line">    Ordering::Greater =&gt; <span class="built_in">println!</span>(<span class="string">&quot;Too big!&quot;</span>),</span><br><span class="line">    Ordering::Equal =&gt; &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;You win!&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时猜对数字后，会先打印 <code>You win!</code> 然后退出程序。</p>
+<h2 id="Step-4-Error-handling">Step 4: Error handling</h2>
+<p>在上面的代码中，我们在接收用户输入后转化为数值，并在用户输入非数值时，使用 <code>.expect</code> 来输出一句提示并中断程序。</p>
+<p>但实际上，我们希望的是，如果用户输入错误，让用户重新输入。此时我们又可以使用 <code>match</code> 来进行模式匹配，并决定后续行为。</p>
+<p>由于我们知道了 <code>.parse()</code> 会返回 <code>Ok</code> 或者 <code>Err</code>，那我们就可以写如下代码来进行错误处理：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">guess</span>: <span class="type">u32</span> = <span class="keyword">match</span> guess.<span class="title function_ invoke__">trim</span>().<span class="title function_ invoke__">parse</span>() &#123;</span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(num) =&gt; num,</span><br><span class="line">    <span class="title function_ invoke__">Err</span>(_) =&gt; <span class="keyword">continue</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>当 <code>.parse()</code> 返回 <code>Ok</code> 时会同时返回转换成功的数值，所以当操作成功时，这个值会直接赋值给 <code>guess</code> 如我们期待的那样；而如果返回值为 <code>Err</code>，匹配到后我们的处理方式为 <code>continue</code>，也就是中断当前循环并执行下个循环。<code>Err(_)</code> 表示匹配所有类型的 <code>Err</code> 返回值。</p>
+<p>当然，在匹配到 <code>Err</code> 时我们还可以加一些提示，修改完成后，整体代码如下</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::io;</span><br><span class="line"><span class="keyword">use</span> std::cmp::Ordering;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> rand::Rng;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Guess the number!&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">secret_number</span> = rand::<span class="title function_ invoke__">thread_rng</span>().<span class="title function_ invoke__">gen_range</span>(<span class="number">1</span>..=<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;The secret number is: &#123;secret_number&#125;&quot;</span>);</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">loop</span> &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;Please input your guess.&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">guess</span> = <span class="type">String</span>::<span class="title function_ invoke__">new</span>();</span><br><span class="line"></span><br><span class="line">        io::<span class="title function_ invoke__">stdin</span>()</span><br><span class="line">            .<span class="title function_ invoke__">read_line</span>(&amp;<span class="keyword">mut</span> guess)</span><br><span class="line">            .<span class="title function_ invoke__">expect</span>(<span class="string">&quot;Failed to read line&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> <span class="variable">guess</span>: <span class="type">u32</span> = <span class="keyword">match</span> guess.<span class="title function_ invoke__">trim</span>().<span class="title function_ invoke__">parse</span>() &#123;</span><br><span class="line">            <span class="title function_ invoke__">Ok</span>(num) =&gt; num,</span><br><span class="line">            <span class="title function_ invoke__">Err</span>(_) =&gt; &#123;</span><br><span class="line">                <span class="built_in">println!</span>(<span class="string">&quot;Incorret input, try again.&quot;</span>);</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;You guessed: &#123;&#125;&quot;</span>, guess);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">match</span> guess.<span class="title function_ invoke__">cmp</span>(&amp;secret_number) &#123;</span><br><span class="line">            Ordering::Less =&gt; <span class="built_in">println!</span>(<span class="string">&quot;Too small!&quot;</span>),</span><br><span class="line">            Ordering::Greater =&gt; <span class="built_in">println!</span>(<span class="string">&quot;Too big!&quot;</span>),</span><br><span class="line">            Ordering::Equal =&gt; &#123;</span><br><span class="line">                <span class="built_in">println!</span>(<span class="string">&quot;You win!&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" rel="tag"># 学习记录</a>
+              <a href="/tags/Rust/" rel="tag"># Rust</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/06/14/01-Intro-to-Rust/" rel="prev" title="01. Intro to Rust">
+      <i class="fa fa-chevron-left"></i> 01. Intro to Rust
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">02. Guessing Game</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1-Input-a-number"><span class="nav-number">1.1.</span> <span class="nav-text">Step 1: Input a number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2-Generate-Secret-Number"><span class="nav-number">1.2.</span> <span class="nav-text">Step 2: Generate Secret Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-3-Comparing"><span class="nav-number">1.3.</span> <span class="nav-text">Step 3: Comparing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-3-Looping"><span class="nav-number">1.4.</span> <span class="nav-text">Step 3: Looping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-4-Error-handling"><span class="nav-number">1.5.</span> <span class="nav-text">Step 4: Error handling</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Tisxst</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tisxst</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
