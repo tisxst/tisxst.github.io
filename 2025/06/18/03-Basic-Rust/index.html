@@ -18,7 +18,7 @@
 <meta property="og:description" content="这里介绍了和其他变成语言一样的 Rust 基础概念，从变量开始。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-18T13:55:20.000Z">
-<meta property="article:modified_time" content="2025-06-19T08:13:10.615Z">
+<meta property="article:modified_time" content="2025-06-21T04:20:56.641Z">
 <meta property="article:author" content="Tisxst">
 <meta property="article:tag" content="学习记录">
 <meta property="article:tag" content="Rust">
@@ -289,7 +289,7 @@
 
                 <!-- 文章字数统计 -->
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">599</span>Reading time: <span class="post-count reading-time">2 min</span></span>
+                        <span>Word count: <span class="post-count word-count">1.4k</span>Reading time: <span class="post-count reading-time">5 min</span></span>
                     </div>
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
@@ -465,7 +465,11 @@
 <h2 id="2-Data-type">2 - Data type</h2>
 <p>上一篇笔记中我们记录了数值类型变量：i32, u32, i64, u64。Rust 需要在编译时知道所有变量的类型。因此当一个变量存在多个可能的类型时，编译会报错。</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误写法</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">guess</span> = <span class="string">&quot;42&quot;</span>.<span class="title function_ invoke__">parse</span>().<span class="title function_ invoke__">expect</span>(<span class="string">&quot;Not a number!&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确写法</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">guess</span>: <span class="type">u32</span> = <span class="string">&quot;42&quot;</span>.<span class="title function_ invoke__">parse</span>().<span class="title function_ invoke__">expect</span>(<span class="string">&quot;Not a number!&quot;</span>);</span><br></pre></td></tr></table></figure>
-<p>除了上述这四种数据类型之外，还有其他长度大小的数值型变量</p>
+<p>如进行两个不相同的数据类型之间的的运算，编译器会报错。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">num1</span>: <span class="type">i32</span> = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">num2</span>: <span class="type">i64</span> = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">result</span> = num1 + num2; <span class="comment">// 报错</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-Integer">2.1 - Integer</h3>
+<p>除了上述这四种数据类型之外，还有其他长度大小的数值型变量，创建一个指定类型的变量需要使用 <code>:</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">num</span>: <span class="type">i32</span> = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">num</span>: <span class="type">i64</span> = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <table>
 <thead>
 <tr>
@@ -508,6 +512,32 @@
 </tbody>
 </table>
 <p><code>arch</code> 是 architecture 的缩写，也就是说这个类型的变量大小取决于计算机的架构，如果是 32 位的架构，就是 32 位大小，64 位架构就是 64 位大小。</p>
+<p>这里有无符号位和 C 语言的逻辑基本是一样的：所有数据都是用补码进行储存。</p>
+<h3 id="2-2-Float">2.2 - Float</h3>
+<p>与正数不同，所有的浮点数都是 <code>signed</code>，而且只有两种类型的浮点 <code>f32</code> 与 <code>f64</code>。Rust 的默认浮点类型是 <code>f64</code>，这是因为在现代的计算机处理器上运行速度几乎没差别。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">f_num</span>: <span class="type">f32</span> = <span class="number">10.5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-Boolean">2.2 - Boolean</h3>
+<p>与其他的编程语言一样，包含 <code>true</code> 与 <code>false</code>。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">t</span> = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">f</span>: <span class="type">bool</span> = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-Char">2.3 - Char</h3>
+<p>字符类型数据，使用单引号把<strong>一个</strong>字符括起来，这个字符可以是任何字符，甚至可以是 emoji。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">c</span> = <span class="string">&#x27;z&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="variable">z</span>: <span class="type">char</span> = <span class="string">&#x27;狗&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-Tuple-and-array">2.4 - Tuple and array</h3>
+<p>元组与数组都是数据集合，元组创建后不可以更改长度，元组的符号是小括号 <code>()</code></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">tup</span>: (<span class="type">i32</span>, <span class="type">f64</span>, <span class="type">bool</span>) = (<span class="number">500</span>, <span class="number">10.5</span>, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果要读取元组内的值，可以使用模式匹配，对元组元素进行结构（Destructuring）。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">tup</span>: (<span class="type">i32</span>, <span class="type">f64</span>, <span class="type">bool</span>) = (<span class="number">500</span>, <span class="number">10.5</span>, <span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">let</span> (x, y, z) = tup;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;y = &#123;y&#125;)&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的实际操作，是将一个复杂数据结构内部的成员提取出来，并赋值给多个变量；简单地说由于元组 <code>tup</code> 有三个元素，并且 <code>(x, y, z)</code> 也是三个元素，所以二者的结构是匹配的，所以 Rust 将元组成员依次赋值给了 <code>x</code>, <code>y</code>, <code>z</code> 三个变量。</p>
+<p>当然，也可以通过传统的访问元素索引位置获取元素值。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">tup</span>: (<span class="type">i32</span>, <span class="type">f64</span>, <span class="type">bool</span>) = (<span class="number">500</span>, <span class="number">10.5</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">let</span> (x, y, z) = tup;</span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;y = &#123;y&#125;&quot;</span>);</span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;x = &#123;&#125;&quot;</span>, tup.<span class="number">0</span>);</span><br><span class="line"><span class="built_in">println!</span>(<span class="string">&quot;z = &#123;&#125;&quot;</span>, tup.<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Rust 中的数组与其他语言也不同，它是同一个类型数据的集合，而且创建后无法变更长度，数组的符号是中括号 <code>[]</code>。一个可以变更长短的数组是另一个数据类型，叫 vector。正儿八经的翻译应该是<strong>向量</strong>，但是它表达的涵义就是一个可变长度的数组。</p>
+<p>定义数组的方法也有两个，一个显式规定，一个 Rust 自动判断</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">a</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> <span class="variable">b</span>: [<span class="type">i32</span>; <span class="number">5</span>] = [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>];</span><br></pre></td></tr></table></figure>
+<p><code>[i32; 5]</code> 表示这是一个 <code>i32</code> 类型的数组，长度为 5。与元组不同，使用索引读取元素的方法同 Python</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">a</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"><span class="keyword">let</span> <span class="variable">first</span> = a[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">let</span> <span class="variable">last</span> = a[-<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+<hr>
+<p>由于元组和数组都固定长度，所以程序编译时，不会进行报错，但是实际运行时，如果尝试访问集合长度外的元素，会产生<strong>运行时错误（runtime error）</strong>。</p>
 
     </article>
     <!-- license -->
@@ -515,7 +545,7 @@
             <p>Author：<a href="https://tisxst.github.io">Tisxst</a>
             <p>Link：<a href="https://tisxst.github.io/2025/06/18/03-Basic-Rust/">https://tisxst.github.io/2025/06/18/03-Basic-Rust/</a>
             <p>Publish date：<a href="https://tisxst.github.io/2025/06/18/03-Basic-Rust/">June 18th 2025, 9:55:20 pm</a>
-            <p>Update date：<a href="https://tisxst.github.io/2025/06/18/03-Basic-Rust/">June 19th 2025, 4:13:10 pm</a>
+            <p>Update date：<a href="https://tisxst.github.io/2025/06/18/03-Basic-Rust/">June 21st 2025, 12:20:56 pm</a>
             <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     <!-- paginator -->
@@ -579,7 +609,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Variables"><span class="toc-number">1.</span> <span class="toc-text">1 - Variables</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Data-type"><span class="toc-number">2.</span> <span class="toc-text">2 - Data type</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Variables"><span class="toc-number">1.</span> <span class="toc-text">1 - Variables</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Data-type"><span class="toc-number">2.</span> <span class="toc-text">2 - Data type</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Integer"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 - Integer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Float"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 - Float</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Boolean"><span class="toc-number">2.3.</span> <span class="toc-text">2.2 - Boolean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-Char"><span class="toc-number">2.4.</span> <span class="toc-text">2.3 - Char</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-Tuple-and-array"><span class="toc-number">2.5.</span> <span class="toc-text">2.4 - Tuple and array</span></a></li></ol></li></ol>
             </div>
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
