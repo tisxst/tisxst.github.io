@@ -10,15 +10,15 @@
     <meta name="copyright" content="Tisxst">
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     <meta name="description" content="">
-    <meta name="description" content="1 - 命名原则 Rust 使用的变量与方法名均默认采用蛇形命名方式，也就是全部小写，用下划线分割单词，比如 do_know_why。 123456789fn main() &#123;    println!(&quot;Hello, world!&quot;)        another_fucntion();&#125;fn another_function() &#123;    pri">
+    <meta name="description" content="1 - 条件语句 虽然在前面的笔记中，我们使用了 match 作为对比判断的方法，但是 Rust 中依旧包含了 if 的判断语法。 1234567891011fn main() &#123;    let number: i32 &#x3D; 3;    if number &lt; 1 &#123;        println!(&quot;The number is less than 1&quot;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="04. Function">
-<meta property="og:url" content="https://tisxst.github.io/2025/06/21/04-Function/index.html">
+<meta property="og:title" content="05. Control flow">
+<meta property="og:url" content="https://tisxst.github.io/2025/06/29/05-Control-flow/index.html">
 <meta property="og:site_name" content="Tisxst">
-<meta property="og:description" content="1 - 命名原则 Rust 使用的变量与方法名均默认采用蛇形命名方式，也就是全部小写，用下划线分割单词，比如 do_know_why。 123456789fn main() &#123;    println!(&quot;Hello, world!&quot;)        another_fucntion();&#125;fn another_function() &#123;    pri">
+<meta property="og:description" content="1 - 条件语句 虽然在前面的笔记中，我们使用了 match 作为对比判断的方法，但是 Rust 中依旧包含了 if 的判断语法。 1234567891011fn main() &#123;    let number: i32 &#x3D; 3;    if number &lt; 1 &#123;        println!(&quot;The number is less than 1&quot;">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-06-21T04:34:59.000Z">
-<meta property="article:modified_time" content="2025-06-28T14:57:58.322Z">
+<meta property="article:published_time" content="2025-06-29T01:25:40.000Z">
+<meta property="article:modified_time" content="2025-06-29T13:28:17.607Z">
 <meta property="article:author" content="Tisxst">
 <meta property="article:tag" content="学习记录">
 <meta property="article:tag" content="Rust">
@@ -26,7 +26,7 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/mint.png">
-    <title>04. Function · Tisxst&#39;s Blog</title>
+    <title>05. Control flow · Tisxst&#39;s Blog</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -244,7 +244,7 @@
             <a href="/">Tisxst&#39;s Blog</a>
         </div>
         <div class="post-title header-element">
-            <a href="#" class="post-name">04. Function</a>
+            <a href="#" class="post-name">05. Control flow</a>
         </div>
     </div>
 </header>
@@ -271,7 +271,7 @@
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-                04. Function
+                05. Control flow
             <!-- 404 -->
         </h1>
         <!-- 副标题 -->
@@ -289,12 +289,12 @@
 
                 <!-- 文章字数统计 -->
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">524</span>Reading time: <span class="post-count reading-time">2 min</span></span>
+                        <span>Word count: <span class="post-count word-count">885</span>Reading time: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 <div class="post-intro-meta">
                     <!-- 撰写日期 -->
                     <span class="iconfont-archer post-intro-calander">&#xe676;</span>
-                    <span class="post-intro-time">2025/06/21</span>
+                    <span class="post-intro-time">2025/06/29</span>
                     <!-- busuanzi -->
                         <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                             <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
@@ -446,45 +446,52 @@
             <div class="container container-unloaded">
                 <main class="main post-page">
     <article class="article-entry">
-        <h2 id="1-命名原则">1 - 命名原则</h2>
-<p>Rust 使用的变量与方法名均默认采用蛇形命名方式，也就是全部小写，用下划线分割单词，比如 <code>do_know_why</code>。</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Hello, world!&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="title function_ invoke__">another_fucntion</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">another_function</span>() &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;Another function!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p>创建一个方法的关键字就是 <code>fn</code>，Rust 不在乎你在哪里定义了函数，只要你在调用函数的时候该函数在其范围内可见就 OK。这个范围内可见是另外一个话题，后续再探讨。</p>
-<h2 id="2-参数">2 - 参数</h2>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="title function_ invoke__">another_function</span>(<span class="number">5</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">another_function</span>(x: <span class="type">i32</span>) &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;The value of x is: &#123;x&#125;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>5 是实际传入的参数，<code>x: i32</code> 是我们要传入参数的形式。</p>
-<p>当一个函数拥有多个参数的时候，需要用 <code>,</code> 进行分隔。</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="title function_ invoke__">print_labeled_measurement</span>(<span class="number">5</span>, <span class="string">&#x27;h&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">print_labelded_measurement</span>(value: <span class="type">i32</span>, unit_label: <span class="type">char</span>) &#123;</span><br><span class="line">    <span class="title function_ invoke__">println</span>(<span class="string">&quot;The measurement is: &#123;value&#125;&#123;unit_label&#125;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="3-语句、表达式与返回值">3 - 语句、表达式与返回值</h2>
-<p>在 Rust 中，语句（statement）与表达式（expression）是两个不同的东西。</p>
-<p>语句返回一个空元组，因此大多数的时候只是执行操作，以分号结尾 <code>;</code>。<br>
-表达式带有返回值，通常不以分号结尾；Rust 语言设计重度依赖表达式，所以要了解这两者的区别和表达式的使用原则。</p>
-<p>当我们定义一个函数时，除了参数，我们同样可以指定返回值。这里的制定返回值不是像形式参数一样必须起个名，而是只需要指定一个返回值类型。</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">result</span> = <span class="title function_ invoke__">add_up</span>(<span class="number">10</span>, <span class="number">15</span>);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;The result is: &#123;&#125;&quot;</span>, result);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">add_up</span>(x:<span class="type">i32</span>, y:<span class="type">i32</span>) <span class="punctuation">-&gt;</span> <span class="type">i32</span> &#123;</span><br><span class="line">    x + y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到，我们进行 <code>let</code> 的时候是带了分号的，因为我们不指望 <code>let</code> 有一个返回值；但是在 <code>add_up</code> 函数中，<code>x + y</code> 并没有用分号结尾，也没有 <code>return</code> 语句，因为在创建函数的时候指定了，该函数返回一个 <code>i32</code> 类型的值，而 <code>x + y</code> 就会作为返回值传递给 <code>main</code> 函数中的 <code>result</code>。</p>
+        <h2 id="1-条件语句">1 - 条件语句</h2>
+<p>虽然在前面的笔记中，我们使用了 <code>match</code> 作为对比判断的方法，但是 Rust 中依旧包含了 <code>if</code> 的判断语法。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">number</span>: <span class="type">i32</span> = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> number &lt; <span class="number">1</span> &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;The number is less than 1&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> number == <span class="number">3</span> &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;The number is 3&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;Number is not less than 1 or equal to 3&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中 <code>if</code> 后的判断条件必须为 <code>bool</code>。</p>
+<p>由于 <code>if</code> 是一个表达式，拥有返回值，所以可以直接将结果赋值给变量，但是要注意其中的执行语句也必须是表达式，否则返回值就是一个空元组。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">number</span>: <span class="type">i32</span> = <span class="keyword">if</span> <span class="number">1</span> &gt; <span class="number">2</span> &#123; <span class="number">1</span> &#125; <span class="keyword">else</span> &#123; <span class="number">2</span> &#125;;</span><br></pre></td></tr></table></figure>
+<p>但是需要注意的是，由于 <code>if</code> 的不同分支代码可能返回不同的结果，这种赋值操作一定要注意执行语句中的返回值类型，因此存在潜在的编译错误风险。</p>
+<h2 id="2-循环语句">2 - 循环语句</h2>
+<p>在猜数字的代码中，我们用到了循环，也就是关键字 <code>loop</code>。不同于其他语言的 <code>for</code> 或者 <code>while</code> 的带参条件循环，<code>loop</code> 需要在代码块中设定终止条件。</p>
+<p>而由于 <code>loop</code> 本身是个表达式，同 <code>if</code> 一样，我们可以将其返回值赋值给其他变量。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">counter</span> = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">result</span> = <span class="keyword">loop</span> &#123;</span><br><span class="line">        counter += <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> counter == <span class="number">10</span> &#123;</span><br><span class="line">            <span class="keyword">break</span> counter * <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;The result is &#123;result&#125;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当代码退出 <code>loop</code> 循环的时候有个 <code>break counter * 2;</code> 的表达式，这里其实让我愣了一下，一个是其他语言中所有的 <code>break</code> 后跟随的任何内容都会执行，另一个是这个表达式以分号结尾，我的第一反应是“这不应该返回个空元组吗？”。</p>
+<p>但是如果我们看下面这个最基础的赋值操作</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">number</span> = <span class="number">4</span> + <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<p>我们不能说 <code>number</code> 赋值结束后是个空元组，因为 <code>4 + 5</code> 是个表达式，返回了 9；上面的 <code>break</code> 也是同理，<code>break</code> 后执行了表达式 <code>counter * 2</code> 并作为 <code>loop</code> 的返回值赋给 <code>result</code> 变量。</p>
+<p>如果我们把代码改成熟悉一点的 <code>return</code> 会看起来合理一些，只不过其他语言中 <code>break</code> 是不会带回任何返回值的，Rust 比较特殊。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">result</span> = <span class="keyword">loop</span> &#123;</span><br><span class="line">    counter += <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> counter == <span class="number">10</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> counter * <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>注意，这里不能用 <code>return</code>，如果我们用 <code>return</code> 返回，那这个函数就结束了，而不是结束了当前循环。</p>
+<h3 id="2-1-Loop-labels">2.1 - Loop labels</h3>
+<p>类似于古早语言中的 <code>goto</code>，<code>loop</code> 中可以指定跳转循环的位置。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">count</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="symbol">&#x27;counting_up</span>: <span class="keyword">loop</span> &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;count = &#123;count&#125;&quot;</span>);</span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">remaining</span> = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">loop</span> &#123;</span><br><span class="line">            <span class="built_in">println!</span>(<span class="string">&quot;remaining = &#123;remaining&#125;&quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> remaining == <span class="number">9</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> count == <span class="number">2</span> &#123;</span><br><span class="line">                <span class="keyword">break</span> <span class="symbol">&#x27;counting_up</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            remaining -= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        count += <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;End count = &#123;count&#125;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-while-循环">2.2 - while 循环</h3>
+<p>虽然首先介绍了 <code>loop</code> 方法，但是 Rust 中依旧有 <code>while</code> 循环。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">number</span> = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> number != <span class="number">0</span> &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;&#123;number&#125;!&quot;</span>);</span><br><span class="line"></span><br><span class="line">        number -= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;LIFTOFF!!!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-for-循环">2.3 - for 循环</h3>
+<p>Rust 中 <code>for</code> 循环的用法比较类似 Python，不过有比较有趣的用法</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">first_arr</span> = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line">    <span class="keyword">for</span> <span class="variable">number</span> <span class="keyword">in</span> first_arr &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;&#123;number&#125;!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;____________&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> <span class="variable">number</span> <span class="keyword">in</span> (<span class="number">1</span>..<span class="number">6</span>).<span class="title function_ invoke__">rev</span>() &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;&#123;number&#125;!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一个 <code>for</code> 循环看起来比较容易理解；第二个 <code>for</code> 循环基本就是 Python 中的 <code>range</code>，同样是包头不包尾，而 <code>rev()</code> 是指反向循环。</p>
 
     </article>
     <!-- license -->
         <div class="license-wrapper">
             <p>Author：<a href="https://tisxst.github.io">Tisxst</a>
-            <p>Link：<a href="https://tisxst.github.io/2025/06/21/04-Function/">https://tisxst.github.io/2025/06/21/04-Function/</a>
-            <p>Publish date：<a href="https://tisxst.github.io/2025/06/21/04-Function/">June 21st 2025, 12:34:59 pm</a>
-            <p>Update date：<a href="https://tisxst.github.io/2025/06/21/04-Function/">June 28th 2025, 10:57:58 pm</a>
+            <p>Link：<a href="https://tisxst.github.io/2025/06/29/05-Control-flow/">https://tisxst.github.io/2025/06/29/05-Control-flow/</a>
+            <p>Publish date：<a href="https://tisxst.github.io/2025/06/29/05-Control-flow/">June 29th 2025, 9:25:40 am</a>
+            <p>Update date：<a href="https://tisxst.github.io/2025/06/29/05-Control-flow/">June 29th 2025, 9:28:17 pm</a>
             <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     <!-- paginator -->
     <ul class="post-paginator">
         <li class="next">
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2025/06/25/%E6%B2%9F%E9%80%9A%E7%9A%84%E9%97%AE%E9%A2%98/" title="沟通的问题">
-                    <div class="nextTitle">沟通的问题</div>
-                </a>
         </li>
         <li class="previous">
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2025/06/19/fall-by-the-wayside/" title="对于“半途而废”的思考">
-                    <div class="prevTitle">对于“半途而废”的思考</div>
+                <a href="/2025/06/25/%E6%B2%9F%E9%80%9A%E7%9A%84%E9%97%AE%E9%A2%98/" title="沟通的问题">
+                    <div class="prevTitle">沟通的问题</div>
                 </a>
         </li>
     </ul>
@@ -534,7 +541,7 @@
                 <div class="toc-catalog">
                     <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
                 </div>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%91%BD%E5%90%8D%E5%8E%9F%E5%88%99"><span class="toc-number">1.</span> <span class="toc-text">1 - 命名原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8F%82%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">2 - 参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%AF%AD%E5%8F%A5%E3%80%81%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-number">3.</span> <span class="toc-text">3 - 语句、表达式与返回值</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.</span> <span class="toc-text">1 - 条件语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.</span> <span class="toc-text">2 - 循环语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Loop-labels"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 - Loop labels</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-while-%E5%BE%AA%E7%8E%AF"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 - while 循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-for-%E5%BE%AA%E7%8E%AF"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 - for 循环</span></a></li></ol></li></ol>
             </div>
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
